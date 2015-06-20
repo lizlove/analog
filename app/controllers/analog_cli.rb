@@ -10,10 +10,17 @@ class AnalogCLI
     puts "Please enter your British word for translation:"
     uk_input = gets.strip.downcase
 
-    sql = <<-SQL
-
+    sql = <<- SQL
+      #change this to spelling if we add the table for weird words
+      SELECT us FROM analog WHERE uk = uk_input
     SQL 
 
+      trans = db.execute(sql)
+        if sql = NULL
+          puts "Invalid word. Please try again."
+        else
+          puts trans
+        end 
   end
 
   def us_search

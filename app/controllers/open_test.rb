@@ -1,3 +1,5 @@
+#ugh wtf fix this eventually
+
 require 'Nokogiri'
 require 'open-uri'
 
