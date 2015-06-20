@@ -1,6 +1,7 @@
-# A sample Gemfile
 source "https://rubygems.org"
 
-# gem "rails"
-gem 'pry'
-gem 'nokogiri'
+# Database
+gem 'sqlite3'
+
+# Testing
+gem 'rspec'

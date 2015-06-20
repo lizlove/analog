@@ -1,45 +1,53 @@
 class AnalogCLI
+  attr_accessor :id, :uk, :us
 
-  def initialize(site)
-    @site = site
-    @students = StudentScraper.new(@site).call
+  def initialize
+    @@db = DB 
+    #do I need to change this to a local variable???? or instance variable? 
+  end 
+
+  def uk_search
+    puts "Please enter your British word for translation:"
+    uk_input = gets.strip.downcase
+
+    sql = <<- SQL
+      #change this to spelling if we add the table for weird words
+      SELECT us FROM analog WHERE uk = uk_input
+    SQL 
+
+      trans = db.execute(sql)
+        if sql = NULL
+          puts "Invalid word. Please try again."
+        else
+          puts trans
+        end 
   end
 
-  # Interface
-  def index
-    @students.keys.each.with_index(1){|n,i| puts "#{i}. #{n}"}
+  def us_search
+    puts "Please enter your American word for translation:"
+    us_input = gets.strip.downcase
   end
 
-  # Interface
-  def show_student(student)
-    [:name, :github, :linkedin, :twitter, :rss].each do |attribute|
-      puts "#{attribute.to_s.capitalize}: #{student.send(attribute)}"
-    end
+
+  def show_words
+    #connect to DB
+    #get SQL query...
   end
 
-  def call
+  def call(input)
     # Procedure / Interface
-    input = nil
     while input != "exit"
-      puts "Please enter your command:"
-      input = gets.strip
-      case input
-      when "index"
-        index
+      case input.downcase
+      when "british"
+        uk_search
+      when "american"
+        us_search
       when "show"
-        puts "Which student do you want to see?"
-        name = gets.strip # "Avi Flombaum"
-        
-        student = Student.find_by_name(name)
-
-        url = @students[name]
-
-        student = Student.new(url, @site)
-        
-        show_student(student)
+        show_words
       end
     end
   end
 
-end
+# end
 
+call
