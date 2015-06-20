@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require_relative "../config/environment"
+
+puts "Which country would you like to scrape?"
+country = gets.strip
+AnalogCLI.new(country).call
