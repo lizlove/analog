@@ -1,17 +1,12 @@
 class AnalogCLI
 
-  def initialize(site)
-    @site = site
-    @students = StudentScraper.new(@site).call
+  def initialize(country)
+    @country = country
   end
 
-  # Interface
-  def index
-    @students.keys.each.with_index(1){|n,i| puts "#{i}. #{n}"}
-  end
 
-  # Interface
-  def show_student(student)
+  # Interface - entire list?
+  def show_words(country)
     [:name, :github, :linkedin, :twitter, :rss].each do |attribute|
       puts "#{attribute.to_s.capitalize}: #{student.send(attribute)}"
     end
@@ -21,7 +16,7 @@ class AnalogCLI
     # Procedure / Interface
     input = nil
     while input != "exit"
-      puts "Please enter your command:"
+      puts "Please enter your word for translation:"
       input = gets.strip
       case input
       when "index"

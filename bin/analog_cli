@@ -2,6 +2,6 @@
 
 require_relative "../config/environment"
 
-puts "Which country would you like to scrape?"
+puts "Which is your native English: UK or USA?"
 country = gets.strip
 AnalogCLI.new(country).call
