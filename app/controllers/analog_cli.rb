@@ -1,39 +1,40 @@
-require 'open-uri'
-require 'Nokogiri'
+class AnalogCLI
+  attr_accessor :id, :uk, :us
 
-# class AnalogCLI
+  def initialize
+    @@db = DB 
+    #do I need to change this to a local variable???? or instance variable? 
+  end 
 
-  # def initialize(country)
-  #   @country = country
-  # end
+  def uk_search
+    puts "Please enter your British word for translation:"
+    uk_input = gets.strip.downcase
 
-  def british
-    puts "Please enter your word for translation:"
-    british_input = gets.strip
+    sql = <<-SQL
+
+    SQL 
+
   end
 
-  def us
-    puts "Please enter your word for translation:"
-    us_input = gets.strip
+  def us_search
+    puts "Please enter your American word for translation:"
+    us_input = gets.strip.downcase
   end
 
 
   def show_words
-    Nokogiri::HTML(system("open http://www.tysto.com/uk-us-spelling-list.html"))
+    #connect to DB
+    #get SQL query...
   end
 
-  def call
+  def call(input)
     # Procedure / Interface
-    puts ""
-    input = nil
     while input != "exit"
-      puts "Please choose the version of English that you would like to translate from: 'British' or 'US'.\nTo see a list of all words and translations please type 'show'"
-      input = gets.strip
-      case input
+      case input.downcase
       when "british"
-        british
-      when "us"
-        us
+        uk_search
+      when "american"
+        us_search
       when "show"
         show_words
       end

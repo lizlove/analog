@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-
-require_relative "../config/environment"
-
-puts "Which is your native English: UK or USA?"
-country = gets.strip
-AnalogCLI.new(country).call
