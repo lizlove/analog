@@ -1,40 +1,45 @@
-class AnalogCLI
+require 'open-uri'
+require 'Nokogiri'
 
-  def initialize(country)
-    @country = country
+# class AnalogCLI
+
+  # def initialize(country)
+  #   @country = country
+  # end
+
+  def british
+    puts "Please enter your word for translation:"
+    british_input = gets.strip
+  end
+
+  def us
+    puts "Please enter your word for translation:"
+    us_input = gets.strip
   end
 
 
-  # Interface - entire list?
-  def show_words(country)
-    [:name, :github, :linkedin, :twitter, :rss].each do |attribute|
-      puts "#{attribute.to_s.capitalize}: #{student.send(attribute)}"
-    end
+  def show_words
+    Nokogiri::HTML(system("open http://www.tysto.com/uk-us-spelling-list.html"))
   end
 
   def call
     # Procedure / Interface
+    puts ""
     input = nil
     while input != "exit"
-      puts "Please enter your word for translation:"
+      puts "Please choose the version of English that you would like to translate from: 'British' or 'US'.\nTo see a list of all words and translations please type 'show'"
       input = gets.strip
       case input
-      when "index"
-        index
+      when "british"
+        british
+      when "us"
+        us
       when "show"
-        puts "Which student do you want to see?"
-        name = gets.strip # "Avi Flombaum"
-        
-        student = Student.find_by_name(name)
-
-        url = @students[name]
-
-        student = Student.new(url, @site)
-        
-        show_student(student)
+        show_words
       end
     end
   end
 
-end
+# end
 
+call
